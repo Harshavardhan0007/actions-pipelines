@@ -1,0 +1,19 @@
+name: Add CI and push the app
+
+on: [push, pull_request]
+
+jobs:
+  ci-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get checkout
+        uses: actions/chekout@v4
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: pytest testing
+        run: python3 -m pytest
